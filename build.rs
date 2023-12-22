@@ -11,8 +11,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .flag("-DLFS_NO_ERROR")
         .file("littlefs/lfs.c")
         .file("littlefs/lfs_util.c")
-        .file("string.c")
-    ;
+        .file("string.c");
 
     #[cfg(not(feature = "assertions"))]
     let builder = builder.flag("-DLFS_NO_ASSERT");
@@ -27,7 +26,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let bindings = bindgen::Builder::default()
         .header("littlefs/lfs.h")
-        .clang_arg(format!("--target={}", target))
+        .clang_arg("x") // ?? only works when adding any bogus argument that is not empty
         .use_core()
         .ctypes_prefix("cty")
         .rustfmt_bindings(true)
